@@ -1,35 +1,25 @@
-# test.py
+import pytest
+from main import count_vowels
 
-import unittest
-from main import get_remainder
+def test_only_vowels():
+    """
+    Проверяем, что функция правильно считает гласные в строке, содержащей только гласные.
+    """
+    assert count_vowels("аеёиоуыэюя") == 10  # Все строчные гласные
+    assert count_vowels("АЕЁИОУЫЭЮЯ") == 10  # Все прописные гласные
 
-class TestGetRemainder(unittest.TestCase):
-    def test_positive_numbers(self):
-        """Тест для положительных чисел"""
-        self.assertEqual(get_remainder(10, 3), 1)  # 10 % 3 = 1
-        self.assertEqual(get_remainder(20, 5), 0)  # 20 % 5 = 0
+def test_no_vowels():
+    """
+    Проверяем, что функция возвращает 0 для строки, не содержащей гласных.
+    """
+    assert count_vowels("бвгджзйклмнпрстфхцчшщ") == 0  # Все согласные буквы
+    assert count_vowels("1234567890!@#$%^&*()") == 0  # Только цифры и символы
+    assert count_vowels("") == 0  # Пустая строка
 
-    def test_negative_divisor(self):
-        """Тест для отрицательного делителя"""
-        self.assertEqual(get_remainder(10, -3), -2)  # 10 % -3 = -2
-        self.assertEqual(get_remainder(20, -4), 0)   # 20 % -4 = 0
-
-    def test_negative_dividend(self):
-        """Тест для отрицательного числителя"""
-        self.assertEqual(get_remainder(-10, 3), 2)   # -10 % 3 = 2
-        self.assertEqual(get_remainder(-20, 7), 1)   # -20 % 7 = 1
-
-    def test_division_by_one(self):
-        """Тест для деления на 1 и -1"""
-        self.assertEqual(get_remainder(10, 1), 0)   # 10 % 1 = 0
-        self.assertEqual(get_remainder(10, -1), 0)  # 10 % -1 = 0
-
-    def test_division_by_zero(self):
-        """Тест для обработки деления на ноль"""
-        with self.assertRaises(ValueError):
-            get_remainder(10, 0)
-        with self.assertRaises(ValueError):
-            get_remainder(0, 0)
-
-if __name__ == "__main__":
-    unittest.main()
+def test_mixed_string():
+    """
+    Проверяем, что функция правильно считает гласные в смешанных строках.
+    """
+    assert count_vowels("Привет мир!") == 3  # 'и', 'е', 'и'
+    assert count_vowels("Как дела? Всё хорошо!") == 7  # 'а', 'е', 'а', 'ё', 'о', 'о', 'е', 'о', 'о'
+    assert count_vowels("ЗДРАВСТВУЙТЕ!") == 3  # 'А', 'У'

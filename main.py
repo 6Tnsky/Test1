@@ -1,11 +1,9 @@
-# main.py
-
-def get_remainder(dividend, divisor):
+def count_vowels(string):
     """
-    Функция для вычисления остатка от деления.
-    Если делитель равен 0, вызывается исключение ValueError.
-    """
-    if divisor == 0:
-        raise ValueError("Деление на ноль невозможно")
+    Функция для подсчета количества гласных в строке на русском языке.
 
-    return dividend % divisor
+    :param string: Входная строка
+    :return: Количество гласных в строке
+    """
+    vowels = "аеёиоуыэюяАЕЁИОУЫЭЮЯ"  # Список русских гласных букв (строчные и прописные)
+    return sum(1 for char in string if char in vowels)
